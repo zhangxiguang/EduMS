@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.StucourseMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Stucourse">
+    <id column="cousID" jdbcType="INTEGER" property="cousid" />
+    <result column="couID" jdbcType="INTEGER" property="couid" />
+    <result column="stuID" jdbcType="INTEGER" property="stuid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cousID, couID, stuID
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.StucourseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stucourse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stucourse
+    where cousID = #{cousid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stucourse
+    where cousID = #{cousid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.StucourseExample">
+    delete from stucourse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Stucourse">
+    insert into stucourse (cousID, couID, stuID
+      )
+    values (#{cousid,jdbcType=INTEGER}, #{couid,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Stucourse">
+    insert into stucourse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cousid != null">
+        cousID,
+      </if>
+      <if test="couid != null">
+        couID,
+      </if>
+      <if test="stuid != null">
+        stuID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cousid != null">
+        #{cousid,jdbcType=INTEGER},
+      </if>
+      <if test="couid != null">
+        #{couid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.StucourseExample" resultType="java.lang.Long">
+    select count(*) from stucourse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stucourse
+    <set>
+      <if test="record.cousid != null">
+        cousID = #{record.cousid,jdbcType=INTEGER},
+      </if>
+      <if test="record.couid != null">
+        couID = #{record.couid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null">
+        stuID = #{record.stuid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stucourse
+    set cousID = #{record.cousid,jdbcType=INTEGER},
+      couID = #{record.couid,jdbcType=INTEGER},
+      stuID = #{record.stuid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Stucourse">
+    update stucourse
+    <set>
+      <if test="couid != null">
+        couID = #{couid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        stuID = #{stuid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cousID = #{cousid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Stucourse">
+    update stucourse
+    set couID = #{couid,jdbcType=INTEGER},
+      stuID = #{stuid,jdbcType=INTEGER}
+    where cousID = #{cousid,jdbcType=INTEGER}
+  </update>
+</mapper>

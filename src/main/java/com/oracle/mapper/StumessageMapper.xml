@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.StumessageMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Stumessage">
+    <id column="stuID" jdbcType="INTEGER" property="stuid" />
+    <result column="stuPass" jdbcType="VARCHAR" property="stupass" />
+    <result column="stuName" jdbcType="VARCHAR" property="stuname" />
+    <result column="stuSex" jdbcType="VARCHAR" property="stusex" />
+    <result column="stuBirthday" jdbcType="VARCHAR" property="stubirthday" />
+    <result column="stuDepartment" jdbcType="INTEGER" property="studepartment" />
+    <result column="stuMajor" jdbcType="INTEGER" property="stumajor" />
+    <result column="stuClass" jdbcType="INTEGER" property="stuclass" />
+    <result column="stuPhone" jdbcType="VARCHAR" property="stuphone" />
+    <result column="stuAddress" jdbcType="VARCHAR" property="stuaddress" />
+    <result column="stuStatus" jdbcType="VARCHAR" property="stustatus" />
+    <result column="stuRemark" jdbcType="VARCHAR" property="sturemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stuID, stuPass, stuName, stuSex, stuBirthday, stuDepartment, stuMajor, stuClass, 
+    stuPhone, stuAddress, stuStatus, stuRemark
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.StumessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stumessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stumessage
+    where stuID = #{stuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stumessage
+    where stuID = #{stuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.StumessageExample">
+    delete from stumessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Stumessage">
+    insert into stumessage (stuID, stuPass, stuName, 
+      stuSex, stuBirthday, stuDepartment, 
+      stuMajor, stuClass, stuPhone, 
+      stuAddress, stuStatus, stuRemark
+      )
+    values (#{stuid,jdbcType=INTEGER}, #{stupass,jdbcType=VARCHAR}, #{stuname,jdbcType=VARCHAR}, 
+      #{stusex,jdbcType=VARCHAR}, #{stubirthday,jdbcType=VARCHAR}, #{studepartment,jdbcType=INTEGER}, 
+      #{stumajor,jdbcType=INTEGER}, #{stuclass,jdbcType=INTEGER}, #{stuphone,jdbcType=VARCHAR}, 
+      #{stuaddress,jdbcType=VARCHAR}, #{stustatus,jdbcType=VARCHAR}, #{sturemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Stumessage">
+    insert into stumessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        stuID,
+      </if>
+      <if test="stupass != null">
+        stuPass,
+      </if>
+      <if test="stuname != null">
+        stuName,
+      </if>
+      <if test="stusex != null">
+        stuSex,
+      </if>
+      <if test="stubirthday != null">
+        stuBirthday,
+      </if>
+      <if test="studepartment != null">
+        stuDepartment,
+      </if>
+      <if test="stumajor != null">
+        stuMajor,
+      </if>
+      <if test="stuclass != null">
+        stuClass,
+      </if>
+      <if test="stuphone != null">
+        stuPhone,
+      </if>
+      <if test="stuaddress != null">
+        stuAddress,
+      </if>
+      <if test="stustatus != null">
+        stuStatus,
+      </if>
+      <if test="sturemark != null">
+        stuRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="stupass != null">
+        #{stupass,jdbcType=VARCHAR},
+      </if>
+      <if test="stuname != null">
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null">
+        #{stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="stubirthday != null">
+        #{stubirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="studepartment != null">
+        #{studepartment,jdbcType=INTEGER},
+      </if>
+      <if test="stumajor != null">
+        #{stumajor,jdbcType=INTEGER},
+      </if>
+      <if test="stuclass != null">
+        #{stuclass,jdbcType=INTEGER},
+      </if>
+      <if test="stuphone != null">
+        #{stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="stuaddress != null">
+        #{stuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stustatus != null">
+        #{stustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sturemark != null">
+        #{sturemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.StumessageExample" resultType="java.lang.Long">
+    select count(*) from stumessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stumessage
+    <set>
+      <if test="record.stuid != null">
+        stuID = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stupass != null">
+        stuPass = #{record.stupass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuname != null">
+        stuName = #{record.stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stusex != null">
+        stuSex = #{record.stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stubirthday != null">
+        stuBirthday = #{record.stubirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studepartment != null">
+        stuDepartment = #{record.studepartment,jdbcType=INTEGER},
+      </if>
+      <if test="record.stumajor != null">
+        stuMajor = #{record.stumajor,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuclass != null">
+        stuClass = #{record.stuclass,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuphone != null">
+        stuPhone = #{record.stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuaddress != null">
+        stuAddress = #{record.stuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stustatus != null">
+        stuStatus = #{record.stustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sturemark != null">
+        stuRemark = #{record.sturemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stumessage
+    set stuID = #{record.stuid,jdbcType=INTEGER},
+      stuPass = #{record.stupass,jdbcType=VARCHAR},
+      stuName = #{record.stuname,jdbcType=VARCHAR},
+      stuSex = #{record.stusex,jdbcType=VARCHAR},
+      stuBirthday = #{record.stubirthday,jdbcType=VARCHAR},
+      stuDepartment = #{record.studepartment,jdbcType=INTEGER},
+      stuMajor = #{record.stumajor,jdbcType=INTEGER},
+      stuClass = #{record.stuclass,jdbcType=INTEGER},
+      stuPhone = #{record.stuphone,jdbcType=VARCHAR},
+      stuAddress = #{record.stuaddress,jdbcType=VARCHAR},
+      stuStatus = #{record.stustatus,jdbcType=VARCHAR},
+      stuRemark = #{record.sturemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Stumessage">
+    update stumessage
+    <set>
+      <if test="stupass != null">
+        stuPass = #{stupass,jdbcType=VARCHAR},
+      </if>
+      <if test="stuname != null">
+        stuName = #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null">
+        stuSex = #{stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="stubirthday != null">
+        stuBirthday = #{stubirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="studepartment != null">
+        stuDepartment = #{studepartment,jdbcType=INTEGER},
+      </if>
+      <if test="stumajor != null">
+        stuMajor = #{stumajor,jdbcType=INTEGER},
+      </if>
+      <if test="stuclass != null">
+        stuClass = #{stuclass,jdbcType=INTEGER},
+      </if>
+      <if test="stuphone != null">
+        stuPhone = #{stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="stuaddress != null">
+        stuAddress = #{stuaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stustatus != null">
+        stuStatus = #{stustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sturemark != null">
+        stuRemark = #{sturemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stuID = #{stuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Stumessage">
+    update stumessage
+    set stuPass = #{stupass,jdbcType=VARCHAR},
+      stuName = #{stuname,jdbcType=VARCHAR},
+      stuSex = #{stusex,jdbcType=VARCHAR},
+      stuBirthday = #{stubirthday,jdbcType=VARCHAR},
+      stuDepartment = #{studepartment,jdbcType=INTEGER},
+      stuMajor = #{stumajor,jdbcType=INTEGER},
+      stuClass = #{stuclass,jdbcType=INTEGER},
+      stuPhone = #{stuphone,jdbcType=VARCHAR},
+      stuAddress = #{stuaddress,jdbcType=VARCHAR},
+      stuStatus = #{stustatus,jdbcType=VARCHAR},
+      stuRemark = #{sturemark,jdbcType=VARCHAR}
+    where stuID = #{stuid,jdbcType=INTEGER}
+  </update>
+</mapper>

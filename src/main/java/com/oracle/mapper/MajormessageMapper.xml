@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.MajormessageMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Majormessage">
+    <id column="majID" jdbcType="INTEGER" property="majid" />
+    <result column="depID" jdbcType="INTEGER" property="depid" />
+    <result column="majName" jdbcType="VARCHAR" property="majname" />
+    <result column="majDeanID" jdbcType="INTEGER" property="majdeanid" />
+    <result column="majIntroduction" jdbcType="VARCHAR" property="majintroduction" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    majID, depID, majName, majDeanID, majIntroduction
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.MajormessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from majormessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from majormessage
+    where majID = #{majid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from majormessage
+    where majID = #{majid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.MajormessageExample">
+    delete from majormessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Majormessage">
+    insert into majormessage (majID, depID, majName, 
+      majDeanID, majIntroduction)
+    values (#{majid,jdbcType=INTEGER}, #{depid,jdbcType=INTEGER}, #{majname,jdbcType=VARCHAR}, 
+      #{majdeanid,jdbcType=INTEGER}, #{majintroduction,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Majormessage">
+    insert into majormessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="majid != null">
+        majID,
+      </if>
+      <if test="depid != null">
+        depID,
+      </if>
+      <if test="majname != null">
+        majName,
+      </if>
+      <if test="majdeanid != null">
+        majDeanID,
+      </if>
+      <if test="majintroduction != null">
+        majIntroduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="majid != null">
+        #{majid,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="majname != null">
+        #{majname,jdbcType=VARCHAR},
+      </if>
+      <if test="majdeanid != null">
+        #{majdeanid,jdbcType=INTEGER},
+      </if>
+      <if test="majintroduction != null">
+        #{majintroduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.MajormessageExample" resultType="java.lang.Long">
+    select count(*) from majormessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update majormessage
+    <set>
+      <if test="record.majid != null">
+        majID = #{record.majid,jdbcType=INTEGER},
+      </if>
+      <if test="record.depid != null">
+        depID = #{record.depid,jdbcType=INTEGER},
+      </if>
+      <if test="record.majname != null">
+        majName = #{record.majname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majdeanid != null">
+        majDeanID = #{record.majdeanid,jdbcType=INTEGER},
+      </if>
+      <if test="record.majintroduction != null">
+        majIntroduction = #{record.majintroduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update majormessage
+    set majID = #{record.majid,jdbcType=INTEGER},
+      depID = #{record.depid,jdbcType=INTEGER},
+      majName = #{record.majname,jdbcType=VARCHAR},
+      majDeanID = #{record.majdeanid,jdbcType=INTEGER},
+      majIntroduction = #{record.majintroduction,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Majormessage">
+    update majormessage
+    <set>
+      <if test="depid != null">
+        depID = #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="majname != null">
+        majName = #{majname,jdbcType=VARCHAR},
+      </if>
+      <if test="majdeanid != null">
+        majDeanID = #{majdeanid,jdbcType=INTEGER},
+      </if>
+      <if test="majintroduction != null">
+        majIntroduction = #{majintroduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where majID = #{majid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Majormessage">
+    update majormessage
+    set depID = #{depid,jdbcType=INTEGER},
+      majName = #{majname,jdbcType=VARCHAR},
+      majDeanID = #{majdeanid,jdbcType=INTEGER},
+      majIntroduction = #{majintroduction,jdbcType=VARCHAR}
+    where majID = #{majid,jdbcType=INTEGER}
+  </update>
+</mapper>

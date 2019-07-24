@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.TeamessageMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Teamessage">
+    <id column="teaID" jdbcType="INTEGER" property="teaid" />
+    <result column="teaDepartment" jdbcType="INTEGER" property="teadepartment" />
+    <result column="teaPass" jdbcType="VARCHAR" property="teapass" />
+    <result column="teaName" jdbcType="VARCHAR" property="teaname" />
+    <result column="teaSex" jdbcType="VARCHAR" property="teasex" />
+    <result column="teaNumber" jdbcType="VARCHAR" property="teanumber" />
+    <result column="teaPhone" jdbcType="VARCHAR" property="teaphone" />
+    <result column="teaAddress" jdbcType="VARCHAR" property="teaaddress" />
+    <result column="teaLevel" jdbcType="VARCHAR" property="tealevel" />
+    <result column="teaDegree" jdbcType="VARCHAR" property="teadegree" />
+    <result column="teaBoss" jdbcType="VARCHAR" property="teaboss" />
+    <result column="teaRemark" jdbcType="VARCHAR" property="tearemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    teaID, teaDepartment, teaPass, teaName, teaSex, teaNumber, teaPhone, teaAddress, 
+    teaLevel, teaDegree, teaBoss, teaRemark
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.TeamessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teamessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teamessage
+    where teaID = #{teaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teamessage
+    where teaID = #{teaid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.TeamessageExample">
+    delete from teamessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Teamessage">
+    insert into teamessage (teaID, teaDepartment, teaPass, 
+      teaName, teaSex, teaNumber, 
+      teaPhone, teaAddress, teaLevel, 
+      teaDegree, teaBoss, teaRemark
+      )
+    values (#{teaid,jdbcType=INTEGER}, #{teadepartment,jdbcType=INTEGER}, #{teapass,jdbcType=VARCHAR}, 
+      #{teaname,jdbcType=VARCHAR}, #{teasex,jdbcType=VARCHAR}, #{teanumber,jdbcType=VARCHAR}, 
+      #{teaphone,jdbcType=VARCHAR}, #{teaaddress,jdbcType=VARCHAR}, #{tealevel,jdbcType=VARCHAR}, 
+      #{teadegree,jdbcType=VARCHAR}, #{teaboss,jdbcType=VARCHAR}, #{tearemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Teamessage">
+    insert into teamessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaid != null">
+        teaID,
+      </if>
+      <if test="teadepartment != null">
+        teaDepartment,
+      </if>
+      <if test="teapass != null">
+        teaPass,
+      </if>
+      <if test="teaname != null">
+        teaName,
+      </if>
+      <if test="teasex != null">
+        teaSex,
+      </if>
+      <if test="teanumber != null">
+        teaNumber,
+      </if>
+      <if test="teaphone != null">
+        teaPhone,
+      </if>
+      <if test="teaaddress != null">
+        teaAddress,
+      </if>
+      <if test="tealevel != null">
+        teaLevel,
+      </if>
+      <if test="teadegree != null">
+        teaDegree,
+      </if>
+      <if test="teaboss != null">
+        teaBoss,
+      </if>
+      <if test="tearemark != null">
+        teaRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaid != null">
+        #{teaid,jdbcType=INTEGER},
+      </if>
+      <if test="teadepartment != null">
+        #{teadepartment,jdbcType=INTEGER},
+      </if>
+      <if test="teapass != null">
+        #{teapass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaname != null">
+        #{teaname,jdbcType=VARCHAR},
+      </if>
+      <if test="teasex != null">
+        #{teasex,jdbcType=VARCHAR},
+      </if>
+      <if test="teanumber != null">
+        #{teanumber,jdbcType=VARCHAR},
+      </if>
+      <if test="teaphone != null">
+        #{teaphone,jdbcType=VARCHAR},
+      </if>
+      <if test="teaaddress != null">
+        #{teaaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tealevel != null">
+        #{tealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="teadegree != null">
+        #{teadegree,jdbcType=VARCHAR},
+      </if>
+      <if test="teaboss != null">
+        #{teaboss,jdbcType=VARCHAR},
+      </if>
+      <if test="tearemark != null">
+        #{tearemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.TeamessageExample" resultType="java.lang.Long">
+    select count(*) from teamessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teamessage
+    <set>
+      <if test="record.teaid != null">
+        teaID = #{record.teaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teadepartment != null">
+        teaDepartment = #{record.teadepartment,jdbcType=INTEGER},
+      </if>
+      <if test="record.teapass != null">
+        teaPass = #{record.teapass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaname != null">
+        teaName = #{record.teaname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teasex != null">
+        teaSex = #{record.teasex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teanumber != null">
+        teaNumber = #{record.teanumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaphone != null">
+        teaPhone = #{record.teaphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaaddress != null">
+        teaAddress = #{record.teaaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tealevel != null">
+        teaLevel = #{record.tealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teadegree != null">
+        teaDegree = #{record.teadegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaboss != null">
+        teaBoss = #{record.teaboss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tearemark != null">
+        teaRemark = #{record.tearemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teamessage
+    set teaID = #{record.teaid,jdbcType=INTEGER},
+      teaDepartment = #{record.teadepartment,jdbcType=INTEGER},
+      teaPass = #{record.teapass,jdbcType=VARCHAR},
+      teaName = #{record.teaname,jdbcType=VARCHAR},
+      teaSex = #{record.teasex,jdbcType=VARCHAR},
+      teaNumber = #{record.teanumber,jdbcType=VARCHAR},
+      teaPhone = #{record.teaphone,jdbcType=VARCHAR},
+      teaAddress = #{record.teaaddress,jdbcType=VARCHAR},
+      teaLevel = #{record.tealevel,jdbcType=VARCHAR},
+      teaDegree = #{record.teadegree,jdbcType=VARCHAR},
+      teaBoss = #{record.teaboss,jdbcType=VARCHAR},
+      teaRemark = #{record.tearemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Teamessage">
+    update teamessage
+    <set>
+      <if test="teadepartment != null">
+        teaDepartment = #{teadepartment,jdbcType=INTEGER},
+      </if>
+      <if test="teapass != null">
+        teaPass = #{teapass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaname != null">
+        teaName = #{teaname,jdbcType=VARCHAR},
+      </if>
+      <if test="teasex != null">
+        teaSex = #{teasex,jdbcType=VARCHAR},
+      </if>
+      <if test="teanumber != null">
+        teaNumber = #{teanumber,jdbcType=VARCHAR},
+      </if>
+      <if test="teaphone != null">
+        teaPhone = #{teaphone,jdbcType=VARCHAR},
+      </if>
+      <if test="teaaddress != null">
+        teaAddress = #{teaaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tealevel != null">
+        teaLevel = #{tealevel,jdbcType=VARCHAR},
+      </if>
+      <if test="teadegree != null">
+        teaDegree = #{teadegree,jdbcType=VARCHAR},
+      </if>
+      <if test="teaboss != null">
+        teaBoss = #{teaboss,jdbcType=VARCHAR},
+      </if>
+      <if test="tearemark != null">
+        teaRemark = #{tearemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teaID = #{teaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Teamessage">
+    update teamessage
+    set teaDepartment = #{teadepartment,jdbcType=INTEGER},
+      teaPass = #{teapass,jdbcType=VARCHAR},
+      teaName = #{teaname,jdbcType=VARCHAR},
+      teaSex = #{teasex,jdbcType=VARCHAR},
+      teaNumber = #{teanumber,jdbcType=VARCHAR},
+      teaPhone = #{teaphone,jdbcType=VARCHAR},
+      teaAddress = #{teaaddress,jdbcType=VARCHAR},
+      teaLevel = #{tealevel,jdbcType=VARCHAR},
+      teaDegree = #{teadegree,jdbcType=VARCHAR},
+      teaBoss = #{teaboss,jdbcType=VARCHAR},
+      teaRemark = #{tearemark,jdbcType=VARCHAR}
+    where teaID = #{teaid,jdbcType=INTEGER}
+  </update>
+</mapper>

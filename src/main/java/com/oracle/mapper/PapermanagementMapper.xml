@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.PapermanagementMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Papermanagement">
+    <id column="papID" jdbcType="INTEGER" property="papid" />
+    <result column="taeID" jdbcType="INTEGER" property="taeid" />
+    <result column="uploadTime" jdbcType="VARCHAR" property="uploadtime" />
+    <result column="papNmae" jdbcType="VARCHAR" property="papnmae" />
+    <result column="papField" jdbcType="VARCHAR" property="papfield" />
+    <result column="uploadPlace" jdbcType="VARCHAR" property="uploadplace" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    papID, taeID, uploadTime, papNmae, papField, uploadPlace
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.PapermanagementExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from papermanagement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from papermanagement
+    where papID = #{papid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from papermanagement
+    where papID = #{papid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.PapermanagementExample">
+    delete from papermanagement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Papermanagement">
+    insert into papermanagement (papID, taeID, uploadTime, 
+      papNmae, papField, uploadPlace
+      )
+    values (#{papid,jdbcType=INTEGER}, #{taeid,jdbcType=INTEGER}, #{uploadtime,jdbcType=VARCHAR}, 
+      #{papnmae,jdbcType=VARCHAR}, #{papfield,jdbcType=VARCHAR}, #{uploadplace,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Papermanagement">
+    insert into papermanagement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="papid != null">
+        papID,
+      </if>
+      <if test="taeid != null">
+        taeID,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+      <if test="papnmae != null">
+        papNmae,
+      </if>
+      <if test="papfield != null">
+        papField,
+      </if>
+      <if test="uploadplace != null">
+        uploadPlace,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="papid != null">
+        #{papid,jdbcType=INTEGER},
+      </if>
+      <if test="taeid != null">
+        #{taeid,jdbcType=INTEGER},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="papnmae != null">
+        #{papnmae,jdbcType=VARCHAR},
+      </if>
+      <if test="papfield != null">
+        #{papfield,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadplace != null">
+        #{uploadplace,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.PapermanagementExample" resultType="java.lang.Long">
+    select count(*) from papermanagement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update papermanagement
+    <set>
+      <if test="record.papid != null">
+        papID = #{record.papid,jdbcType=INTEGER},
+      </if>
+      <if test="record.taeid != null">
+        taeID = #{record.taeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uploadtime != null">
+        uploadTime = #{record.uploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.papnmae != null">
+        papNmae = #{record.papnmae,jdbcType=VARCHAR},
+      </if>
+      <if test="record.papfield != null">
+        papField = #{record.papfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadplace != null">
+        uploadPlace = #{record.uploadplace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update papermanagement
+    set papID = #{record.papid,jdbcType=INTEGER},
+      taeID = #{record.taeid,jdbcType=INTEGER},
+      uploadTime = #{record.uploadtime,jdbcType=VARCHAR},
+      papNmae = #{record.papnmae,jdbcType=VARCHAR},
+      papField = #{record.papfield,jdbcType=VARCHAR},
+      uploadPlace = #{record.uploadplace,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Papermanagement">
+    update papermanagement
+    <set>
+      <if test="taeid != null">
+        taeID = #{taeid,jdbcType=INTEGER},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="papnmae != null">
+        papNmae = #{papnmae,jdbcType=VARCHAR},
+      </if>
+      <if test="papfield != null">
+        papField = #{papfield,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadplace != null">
+        uploadPlace = #{uploadplace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where papID = #{papid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Papermanagement">
+    update papermanagement
+    set taeID = #{taeid,jdbcType=INTEGER},
+      uploadTime = #{uploadtime,jdbcType=VARCHAR},
+      papNmae = #{papnmae,jdbcType=VARCHAR},
+      papField = #{papfield,jdbcType=VARCHAR},
+      uploadPlace = #{uploadplace,jdbcType=VARCHAR}
+    where papID = #{papid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.mapper.AdminmessageMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.entity.Adminmessage">
+    <id column="admID" jdbcType="INTEGER" property="admid" />
+    <result column="admName" jdbcType="VARCHAR" property="admname" />
+    <result column="admPass" jdbcType="VARCHAR" property="admpass" />
+    <result column="admPhone" jdbcType="VARCHAR" property="admphone" />
+    <result column="admStatus" jdbcType="BIT" property="admstatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    admID, admName, admPass, admPhone, admStatus
+  </sql>
+  <select id="selectByExample" parameterType="com.oracle.entity.AdminmessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adminmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from adminmessage
+    where admID = #{admid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adminmessage
+    where admID = #{admid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.entity.AdminmessageExample">
+    delete from adminmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.entity.Adminmessage">
+    insert into adminmessage (admID, admName, admPass, 
+      admPhone, admStatus)
+    values (#{admid,jdbcType=INTEGER}, #{admname,jdbcType=VARCHAR}, #{admpass,jdbcType=VARCHAR}, 
+      #{admphone,jdbcType=VARCHAR}, #{admstatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.entity.Adminmessage">
+    insert into adminmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="admid != null">
+        admID,
+      </if>
+      <if test="admname != null">
+        admName,
+      </if>
+      <if test="admpass != null">
+        admPass,
+      </if>
+      <if test="admphone != null">
+        admPhone,
+      </if>
+      <if test="admstatus != null">
+        admStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="admid != null">
+        #{admid,jdbcType=INTEGER},
+      </if>
+      <if test="admname != null">
+        #{admname,jdbcType=VARCHAR},
+      </if>
+      <if test="admpass != null">
+        #{admpass,jdbcType=VARCHAR},
+      </if>
+      <if test="admphone != null">
+        #{admphone,jdbcType=VARCHAR},
+      </if>
+      <if test="admstatus != null">
+        #{admstatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.entity.AdminmessageExample" resultType="java.lang.Long">
+    select count(*) from adminmessage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update adminmessage
+    <set>
+      <if test="record.admid != null">
+        admID = #{record.admid,jdbcType=INTEGER},
+      </if>
+      <if test="record.admname != null">
+        admName = #{record.admname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admpass != null">
+        admPass = #{record.admpass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admphone != null">
+        admPhone = #{record.admphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admstatus != null">
+        admStatus = #{record.admstatus,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update adminmessage
+    set admID = #{record.admid,jdbcType=INTEGER},
+      admName = #{record.admname,jdbcType=VARCHAR},
+      admPass = #{record.admpass,jdbcType=VARCHAR},
+      admPhone = #{record.admphone,jdbcType=VARCHAR},
+      admStatus = #{record.admstatus,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.entity.Adminmessage">
+    update adminmessage
+    <set>
+      <if test="admname != null">
+        admName = #{admname,jdbcType=VARCHAR},
+      </if>
+      <if test="admpass != null">
+        admPass = #{admpass,jdbcType=VARCHAR},
+      </if>
+      <if test="admphone != null">
+        admPhone = #{admphone,jdbcType=VARCHAR},
+      </if>
+      <if test="admstatus != null">
+        admStatus = #{admstatus,jdbcType=BIT},
+      </if>
+    </set>
+    where admID = #{admid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.entity.Adminmessage">
+    update adminmessage
+    set admName = #{admname,jdbcType=VARCHAR},
+      admPass = #{admpass,jdbcType=VARCHAR},
+      admPhone = #{admphone,jdbcType=VARCHAR},
+      admStatus = #{admstatus,jdbcType=BIT}
+    where admID = #{admid,jdbcType=INTEGER}
+  </update>
+</mapper>
